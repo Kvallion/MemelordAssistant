@@ -73,8 +73,8 @@ sendingButton.addEventListener('click', () => {
 	sendingButton.style.animationName = "spin";
 	setTimeout(() => sendingButton.style.animationName = "none", 750);
 	renderSelector();
+	chatInputField.focus();
 });
-
 
 
 chatInputField.addEventListener('input', () => {
@@ -129,7 +129,7 @@ function runFormOpngBtnRendering() {
 function renderOpeningButton(element) {
 	var formOpeningButton = document.createElement('div');
 
-	formOpeningButton.classList.add('form-opening-button')
+	formOpeningButton.classList.add('form-opening-button');
 
 	formOpeningButton.addEventListener('click', evt => {
 		evt.stopPropagation();
@@ -197,7 +197,8 @@ function renderForm(url) {
 	var keyUrl = url.slice(url.lastIndexOf("/")+1, -4);
 
 
-	var keyWordsSetupForm = document.createElement('form'); //form
+	var keyWordsSetupForm = document.createElement('form');
+
 
 	keyWordsSetupForm.classList.add('key-words-setup-form');
 
@@ -206,13 +207,16 @@ function renderForm(url) {
 		evt.preventDefault();
 	});
 
-	keyWordsSetupForm.addEventListener('keypress', evt => {
-		if (evt.keyCode == 27) { 	//нажат escape
-			evt.stopPropagation();	// не работает, спроси у Жемчуга при возможности
+	keyWordsSetupForm.addEventListener('keydown', evt => {
+		if (evt.keyCode == 27) { //если нажат ESC
 			keyWordsSetupForm.style.opacity = 0;
-			setTimeout(() => keyWordsSetupForm.remove(), 300);
+			setTimeout(function() {
+				keyWordsSetupForm.remove();
+			}, 300);
+			evt.stopPropagation();
 		}
 	});
+
 
 	var formClosingButton = document.createElement('div');	//closing button
 
