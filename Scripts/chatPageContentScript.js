@@ -54,6 +54,19 @@ emojiBtn.style.padding = "6px 10px 6px 3px";
 
 chatInputField.style.paddingRight = "105px"; // увеличиваем отступ поля ввода на размер нашей кнопки
 
+chatInputField.addEventListener('keydown', evt => {
+	if (evt.ctrlKey && evt.altKey && evt.keyCode == 70)
+		renderSelector();
+});
+
+chatInputField.addEventListener('keydown', evt => {
+	let selector = document.querySelector('.selector-wrapper');
+	if (evt.keyCode == 27 && selector) { //нажат ESC
+		setClosingAction();
+		evt.stopPropagation();
+	}
+});
+
 chatButtonsContainer.insertBefore(sendingButton, chatButtonsContainer.firstElementChild);
 
 sendingButton.addEventListener('click', () => {
@@ -61,6 +74,8 @@ sendingButton.addEventListener('click', () => {
 	setTimeout(() => sendingButton.style.animationName = "none", 750);
 	renderSelector();
 });
+
+
 
 chatInputField.addEventListener('input', () => {
 	if (selectorWrapper.style.display != "none") {
