@@ -1,7 +1,10 @@
-$textColor: #f3f7fb
-$mainBGColor: #31282D
+$textColor: #fcfcfc
+$secondTextColor: #aaabad
+$mainBGColor: #181a19
 $secondryBGColor: #483E46
-$elementHoverColor: #7E7A88
+$tertiaryBGColor: #363736
+$elementHoverColor: #3b3d3c
+
 $deepRed: #df0000
 
 @mixin font($fontColor)
@@ -13,7 +16,7 @@ body
 	box-sizing: border-box
 	margin: 0
 	padding: 0
-	background-color: $mainBGColor
+	background-color: $secondryBGColor
 	*, *::before, *::after
 		box-sizing: inherit
 
@@ -29,7 +32,7 @@ body
 	text-align: center
 	padding: 10px
 	// border-bottom: 1px solid $elementHoverColor
-	background-color: $secondryBGColor
+	background-color: $tertiaryBGColor
 	text-transform: uppercase
 	font-family: 'Roboto', sans-serif
 	font-size: 15px

@@ -8,10 +8,8 @@
         ],
 	"browser_action": {
           "default_icon": {
-          	"128": "UI/design/icons/main-logo-128x128.png",
-          	"48": "UI/design/icons/main-logo-48x48.png",      
-            "16": "UI/design/icons/meme-icon_16-16.png",           
-            "24": "UI/design/icons/meme-icon_24-24.png"           
+          	"128": "./UI/design/icons/main-logo-128x128.png",
+          	"48": "./UI/design/icons/main-logo-48x48.png"          
           },
           "default_title": "Memelord Assistant",
           "default_popup": "UI/browserAction/browserActionPopup.html"
