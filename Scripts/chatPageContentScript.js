@@ -7,6 +7,17 @@ var chatInputContainer = document.querySelector('.im-chat-input.clear_fix.im-cha
 	boxLayerWrapper = document.getElementById('box_layer_wrap'),
 	body = document.querySelector('body');
 
+let smth = document.querySelector('.im-page--chat-body-wrap-inner');
+let circle = document.createElement('div');
+circle.classList.add('circle');
+circle.addEventListener('click', evt => {
+	evt.stopPropagation();
+	if (circle.style.animationName != "spin")
+		circle.style.animationName = "spin"
+	else
+		circle.style.animationName = ""
+});
+smth.appendChild(circle)
 
 // chrome.runtime.sendMessage({action: "Clear storage"});
 console.log(localStorage);
