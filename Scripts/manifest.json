@@ -1,0 +1,46 @@
+{
+	"name":"Memelord Assistant",
+	"description":"Отправляй сохраненные мемы во Вконтакте со скорость света",
+	"version":"2.16",
+	"manifest_version":2,
+	"permissions": [
+          "storage"
+        ],
+	"browser_action": {
+          "default_icon": {                    
+            "16": "UI/design/icons/meme-icon_16-16.png",           
+            "24": "UI/design/icons/meme-icon_24-24.png"           
+          },
+          "default_title": "Memelord Assistant",
+          "default_popup": "UI/browserAction/browserActionPopup.html"
+     },
+  
+	"content_scripts" : [
+		{
+			"matches" : ["https://vk.com/im?*sel=*", "http://vk.com/im?*sel=*", "https://vk.com/*al_im.php*"],
+			"js" : [ 
+				//"scripts/test.js"
+				"scripts/chatPageContentScript.js"
+			],
+			"css": [
+				// "UI/design/font.css",
+				"UI/chatPageUI/chatPageUiStyle.css"
+			],
+			"run_at" : "document_end"
+		}
+		// ,
+		// {
+		// 	"matches": ["https://vk.com/im?*sel=*", "http://vk.com/im?*sel=*", "https://vk.com/*al_im.php*"],
+		// 	"js": [
+		// 		"scripts/FALauncher.js"
+		// 	],
+		// 	"run_at" : "document_start"
+		// }
+	],
+	"background": {
+		"scripts" : ["scripts/background.js"],
+		"persistent" : false
+	}
+}
+
+// "https://vk.com/im?*sel=*", "http://vk.com/im?*sel=*"
