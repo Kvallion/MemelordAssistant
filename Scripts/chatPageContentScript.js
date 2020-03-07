@@ -92,17 +92,24 @@ function preparation() {
 
 				boxLayerShowObs.disconnect();
 
-				albumOpngBtn = boxLayerWrapper.querySelector('div[id *= "_000"].photo_row.photos_album._photos_album');
+				showAlbumesBtns = boxLayerWrapper.querySelector('#ui_choose_more_albums_load_more');
+				if (showAlbumesBtns) {
+					showAlbumesBtns.click();
+				}
+				
+				setTimeout( () => {
+					albumOpngBtn = boxLayerWrapper.querySelector('div[id *= "_000"].photo_row.photos_album._photos_album');
 
-				albumOpngBtn.addEventListener('mousedown', () => {
-
-					let boxLayer = document.getElementById('box_layer'),
-						picsContainerShowObs = new MutationObserver(() => {
-							picsContainerShowObs.disconnect();
-							setTimeout(runFormOpngBtnRendering, 1000);
-						}); 
-					picsContainerShowObs.observe(boxLayer, {childList: true})
-				});
+					albumOpngBtn.addEventListener('mousedown', () => {
+	
+						let boxLayer = document.getElementById('box_layer'),
+							picsContainerShowObs = new MutationObserver(() => {
+								picsContainerShowObs.disconnect();
+								setTimeout(runFormOpngBtnRendering, 1000);
+							}); 
+						picsContainerShowObs.observe(boxLayer, {childList: true})
+					});
+				}, 200)
 			});
 			boxLayerShowObs.observe(boxLayerWrapper, {childList: true});
 		}
@@ -665,32 +672,41 @@ function openAttachmentPopup(element) {
 		boxLayerBg.style.opacity = 0;
 		boxLayerWrapper.style.opacity = 0;
 
-		var albumOpngBtn = boxLayerWrapper.querySelector('div[id *= "_000"].photo_row.photos_album._photos_album');
+		showAlbumesBtns = boxLayerWrapper.querySelector('#ui_choose_more_albums_load_more');
+		if (showAlbumesBtns) {
+			showAlbumesBtns.click();
+		}
 
-		var picsCntnrRenderObs = new MutationObserver(() => {
-			picsCntnrRenderObs.disconnect();
+		setTimeout( () => {
+				
+			var albumOpngBtn = boxLayerWrapper.querySelector('div[id *= "_000"].photo_row.photos_album._photos_album');
 
-			setTimeout(() => {
-				var certainContainer = document.querySelector('div[id ^= "photos_choose_wrap"][id $= "_000"]');
-				var picsContainer = certainContainer.querySelector('.photos_choose_rows');
+			var picsCntnrRenderObs = new MutationObserver(() => {
+				picsCntnrRenderObs.disconnect();
 
-				var scrollObs = new MutationObserver(() => {
-					boxLayerWrapper.scrollTo(0, boxLayerWrapper.scrollHeight);
-					if (!attachImg(element)) { //если картинак прикрепилась, то завершает работу
-						scrollObs.disconnect();
+				setTimeout(() => {
+					var certainContainer = document.querySelector('div[id ^= "photos_choose_wrap"][id $= "_000"]');
+					var picsContainer = certainContainer.querySelector('.photos_choose_rows');
 
-						boxLayerBg.style.opacity = 0.7;
-						boxLayerWrapper.style.opacity = 1;
-					}
-				});
-				scrollObs.observe(picsContainer, {childList: true});
+					var scrollObs = new MutationObserver(() => {
+						boxLayerWrapper.scrollTo(0, boxLayerWrapper.scrollHeight);
+						if (!attachImg(element)) { //если картинак прикрепилась, то завершает работу
+							scrollObs.disconnect();
 
-				boxLayerWrapper.scrollTo(0, boxLayerWrapper.scrollHeight); // триггер для scrollObs
-			}, 300);
-		});
-		picsCntnrRenderObs.observe(document.getElementById('box_layer'), {childList: true}); 
+							boxLayerBg.style.opacity = 0.7;
+							boxLayerWrapper.style.opacity = 1;
+						}
+					});
+					scrollObs.observe(picsContainer, {childList: true});
 
-		albumOpngBtn.firstElementChild.click();
+					boxLayerWrapper.scrollTo(0, boxLayerWrapper.scrollHeight); // триггер для scrollObs
+				}, 300);
+			});
+			picsCntnrRenderObs.observe(document.getElementById('box_layer'), {childList: true}); 
+
+			albumOpngBtn.firstElementChild.click();
+		}, 200);
+
 	});
 	obs.observe(boxLayerWrapper, {childList: true});
 
